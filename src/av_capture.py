@@ -228,8 +228,8 @@ def write_metadata_to_file(md_filename,working_dir,header,file_rec_start_time,fr
                                        'song_power':song_powers,
                                        'nosong_power':no_song_powers,
                                        'bg_power':bg_powers,
-                                       'song_nosong_ratio': np.array(song_power) / np.array(no_song_power),
-                                       'song_bg_ratio': np.array(song_power) / np.array(bg_power),
+                                       'song_nosong_ratio': np.array(song_powers) / np.array(no_song_powers),
+                                       'song_bg_ratio': np.array(song_powers) / np.array(bg_powers),
                                        'entropy':ents,
                                        'trigger':detects})
     with open(csv_filename, 'w') as csv_file:
