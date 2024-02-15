@@ -1,0 +1,16 @@
+{
+    "THR_SONG_NOSONG": 1.0,
+    "THR_SONG_BG": 2.0,
+    "THR_ENTROPY": 7.0,
+    "SONG_BAND": [
+        300,
+        8700
+    ],
+    "NOSONG_BAND": [
+        50,
+        1500
+    ],
+    "EXP_SONG": 0.0,
+    "EXP_BG": 60.0,
+    "SEC_AFTER_TRIGGER": 5.0
+}
