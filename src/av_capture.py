@@ -308,7 +308,7 @@ if __name__ == '__main__':
             sig_old = sig
             no_song_power = np.sum(pxx[fidx_no_song[0]:fidx_no_song[1]])
             song_power = np.sum(pxx[fidx_song[0]:fidx_song[1]])
-            bg_power = np.sum(pxx[0:fidx_song[0]])
+            bg_power = np.sum(pxx[0:fidx_no_song[0]])
             psong = pxx[fidx_song[0]:fidx_song[1]] / (np.sum(pxx[fidx_song[0]:fidx_song[1]]) + 1e-10)
             ent = -sum(psong*np.log2(psong))
 
