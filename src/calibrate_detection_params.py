@@ -74,31 +74,31 @@ def choose_camera():
     video_channel = input('Type VIDEO channel number: ')
     return(int(video_channel))
 
-def choose_COM():
-    print("------------------------")
-    print("Available COM port:")
-    print("------------------------")
-    port = list(list_ports.comports())
-    idx = 0
-    for p in port:
-        print(str(idx) + ': ' + str(p.device))
-        idx += 1
-    com_idx = input('Type COM channel number: ')
-    return str(port[int(com_idx)].device)
+# def choose_COM():
+#     print("------------------------")
+#     print("Available COM port:")
+#     print("------------------------")
+#     port = list(list_ports.comports())
+#     idx = 0
+#     for p in port:
+#         print(str(idx) + ': ' + str(p.device))
+#         idx += 1
+#     com_idx = input('Type COM channel number: ')
+#     return str(port[int(com_idx)].device)
     
-def choose_LED_power():
-    window = tk.Tk()
-    v1 = tk.DoubleVar()
-    window.geometry("300x100")
-    window.title('Choose LED power')
-    #master.title('Choose LED level')
-    w = tk.Scale(window, from_=0, to=255,orient=tk.HORIZONTAL,width=10,variable = v1)
-    w.pack()
-    window.mainloop()
-    return int(v1.get())
+# def choose_LED_power():
+#     window = tk.Tk()
+#     v1 = tk.DoubleVar()
+#     window.geometry("300x100")
+#     window.title('Choose LED power')
+#     #master.title('Choose LED level')
+#     w = tk.Scale(window, from_=0, to=255,orient=tk.HORIZONTAL,width=10,variable = v1)
+#     w.pack()
+#     window.mainloop()
+#     return int(v1.get())
     
-def print_value(val):
-    print(val)
+# def print_value(val):
+#     print(val)
 
 class Aud_Vid():
 
@@ -138,7 +138,7 @@ class Aud_Vid():
                   aud = ta.result()
                   return(vid[1].tobytes(),aud)
 
-def get_working_folder_and_params():
+def get_path_to_params():
     root = Tk() # pointing root to Tk() to use it as Tk() in program.
     root.withdraw() # Hides small tkinter window.
     root.attributes('-topmost', True) # Opened windows will be active. above all windows despite of selection.
@@ -148,10 +148,17 @@ def get_working_folder_and_params():
 if __name__ == '__main__':
     import matplotlib
     matplotlib.use('MACOSX')
+    path_to_params = get_path_to_params()
+    print('Parameters in: ' + path_to_params)
+    with open(path_to_params, 'r') as openfile:
+    # Reading from json file
+        params_dict = json.load(openfile)
+    for item in params_dict.items():
+        print(item[0] + ': ' + str(item[1]))
     audio_dev, samplerate = get_audio_devices() 
     #com_dev = choose_COM()
     #print('You chose:\n Audio device {}, whose samplerate is {}, \n Video device {}, \n and COM device {}.'.format(audio_dev,samplerate,video_dev,com_dev))
-    LEDpw = choose_LED_power()
+    #LEDpw = choose_LED_power()
     video_dev = choose_camera()
     av = Aud_Vid(samplerate, video_dev, audio_dev)
     #ser = serial.Serial(com_dev,baudrate=115200)
@@ -159,13 +166,7 @@ if __name__ == '__main__':
     #ser.open()
 
     #print("Select working Folder:")
-    path_to_params = get_working_folder_and_params()
-    print('Parameters in: ' + path_to_params)
-    with open(path_to_params, 'r') as openfile:
-    # Reading from json file
-        params_dict = json.load(openfile)
-    for item in params_dict.items():
-        print(item[0] + ': ' + str(item[1]))
+    
 
     print("Starting to monitor song:")
     
@@ -180,8 +181,9 @@ if __name__ == '__main__':
 
     while True:
         if keyboard.is_pressed("a"):
+            print('aaaaaaaaaa')
             os.system('python configure_param_files.py')
-            path_to_params = get_working_folder_and_params()
+            path_to_params = get_path_to_params()
             print('Parameters in: ' + path_to_params)
             with open(path_to_params, 'r') as openfile:
             # Reading from json file
@@ -210,8 +212,7 @@ if __name__ == '__main__':
 
         detect = (song_power / no_song_power >= params_dict['THR_SONG_NOSONG']) * (song_power / bg_power >= params_dict['THR_SONG_BG']) * (ent <= params_dict['THR_ENTROPY'])
 
-        print('Detect: {}, Powers: Song: {}, Song-NoSong: {}, Song-BG: {}, Entropy: {}'.format(detect,
-                                                                                               song_power, 
+        print('Detect: {}, Song/NoSong: {:2.2f}, Song/BG: {:2.2f}, Entropy: {:2.2f}'.format(detect, 
                                                                                    song_power/(no_song_power+1e-15),
                                                                                    song_power/(bg_power+1e-15),
                                                                                    ent))
