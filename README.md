@@ -12,8 +12,7 @@ LED and to synchronously acquire the microphone and FinchScope fluorescence vide
 ffmpeg, matplotlib, numpy, scipy, pandas, tkinter, pyserial, pyaudio, opencv-python, json, keyboard
 - Copy the script files
 - Use the **configure_param_files** script (type *python configure_param_files.py* in the terminal) to create a configuration file (or start with one of the files in the *parameter_files* folder).
-- Use the 
 
 ### Usage:
-
+- Run the **calibrate_detection_params** script as administrator (type *sudo python calibrate_detection_params.py* in the terminal) to 
 Canary song triggering
