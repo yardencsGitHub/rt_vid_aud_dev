@@ -74,32 +74,6 @@ def choose_camera():
     video_channel = input('Type VIDEO channel number: ')
     return(int(video_channel))
 
-# def choose_COM():
-#     print("------------------------")
-#     print("Available COM port:")
-#     print("------------------------")
-#     port = list(list_ports.comports())
-#     idx = 0
-#     for p in port:
-#         print(str(idx) + ': ' + str(p.device))
-#         idx += 1
-#     com_idx = input('Type COM channel number: ')
-#     return str(port[int(com_idx)].device)
-    
-# def choose_LED_power():
-#     window = tk.Tk()
-#     v1 = tk.DoubleVar()
-#     window.geometry("300x100")
-#     window.title('Choose LED power')
-#     #master.title('Choose LED level')
-#     w = tk.Scale(window, from_=0, to=255,orient=tk.HORIZONTAL,width=10,variable = v1)
-#     w.pack()
-#     window.mainloop()
-#     return int(v1.get())
-    
-# def print_value(val):
-#     print(val)
-
 class Aud_Vid():
 
     def __init__(self, samplerate, video_dev,audio_dev): #, arg
@@ -156,17 +130,8 @@ if __name__ == '__main__':
     for item in params_dict.items():
         print(item[0] + ': ' + str(item[1]))
     audio_dev, samplerate = get_audio_devices() 
-    #com_dev = choose_COM()
-    #print('You chose:\n Audio device {}, whose samplerate is {}, \n Video device {}, \n and COM device {}.'.format(audio_dev,samplerate,video_dev,com_dev))
-    #LEDpw = choose_LED_power()
     video_dev = choose_camera()
     av = Aud_Vid(samplerate, video_dev, audio_dev)
-    #ser = serial.Serial(com_dev,baudrate=115200)
-    #ser.close()
-    #ser.open()
-
-    #print("Select working Folder:")
-    
 
     print("Starting to monitor song:")
     
