@@ -7,10 +7,12 @@ The [FinchScope](https://github.com/gardner-lab/FinchScope) was developed by Wil
 The script monitors a microphone, detects events based on their spectral acoustic properties, and uses these events to trigger turning on the FinchScope's 
 LED and to synchronously acquire the microphone and FinchScope fluorescence video. 
 
-### Installation:
+### Installation and setting up:
 - Create a conda environment with the latest python and the following packages:
-ffmpeg, matplotlib, numpy, scipy, pandas, tkinter, pyserial, pyaudio, opencv-python, json
-
+ffmpeg, matplotlib, numpy, scipy, pandas, tkinter, pyserial, pyaudio, opencv-python, json, keyboard
+- Copy the script files
+- Use the **configure_param_files** script (type *python configure_param_files.py* in the terminal) to create a configuration file (or start with one of the files in the *parameter_files* folder).
+- Use the 
 
 ### Usage:
 
